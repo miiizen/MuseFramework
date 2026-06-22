@@ -54,6 +54,7 @@ public:
     TextStream& operator<<(double);
     TextStream& operator<<(int64_t);
     TextStream& operator<<(uint64_t);
+    TextStream& operator<<(unsigned long);
     TextStream& operator<<(const char* s);
     TextStream& operator<<(std::string_view);
     TextStream& operator<<(const ByteArray& b);

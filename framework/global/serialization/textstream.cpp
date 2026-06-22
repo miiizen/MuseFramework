@@ -148,6 +148,18 @@ TextStream& TextStream::operator<<(const uint64_t val)
     return *this;
 }
 
+TextStream& TextStream::operator<<(const unsigned long val)
+{
+    // ceil(log_10(2^64)) = 20
+    std::array<char, 20> buf{};
+    const auto [last, ec] = std::to_chars(buf.data(), buf.data() + buf.size(), val);
+    IF_ASSERT_FAILED(ec == std::errc {}) {
+        return *this;
+    }
+    write(buf.data(), static_cast<size_t>(last - buf.data()));
+    return *this;
+}
+
 TextStream& TextStream::operator<<(const char* s)
 {
     return operator<<(std::string_view { s });
